@@ -90,7 +90,6 @@ nav ul li:last-child {
   border-top-style: inset;
 }
 
-
 .primary-button {
   margin-top: 10px;
   margin-left: auto;
@@ -147,16 +146,17 @@ section {
 .img-user {  
   width: 60px;
   height: 60px;
+  display:flex;
+  align-items: center;
   background: url(./img/profile_girl.png) center center/60px no-repeat;
-  margin-left: 40px;
-  margin-right: 10px;
+  /* margin-left: 40px;
+  margin-right: 10px; */
   border: none;  
 }
 
 .option { 
   margin-left: 120px;    
 }
-
 
 .id-user {
   text-align: right;
@@ -168,16 +168,27 @@ section {
 }
 
 .post-area {
-  padding-top: 20px;
-  font-family: 'Josefin Sans', sans-serif;  
+  margin:0 auto 20px auto; 
+  width: 80%; 
+  padding-top: 20px; 
+  font-family: 'Josefin Sans', sans-serif;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  border-radius: 3px; 
+  text-align: left;  
+  background-color: #fff;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .post {
-  font-size: 12px;
-  width: 215px;
-  height: 50px;
-  resize: none;
-  border-radius: 3px;     
+  margin-top: 20px;
+  font-size: auto;
+  width: 70%;
+  height: auto;
+  resize: none; 
+  border-radius: 3px; 
+  background-color: whitesmoke;
 }
 
 .txtcom {
@@ -202,7 +213,7 @@ section {
   align-items: center;
   text-align: left;  
   background-color: #fff;
-  border-style: outset;;
+  border-style: outset;
 }
 
 .idname {
@@ -241,12 +252,11 @@ section {
 }
 
 .button-send {
-  display: inline;
-  margin-left: 5px;
-  margin-right: 5px;
+  display: flex;
   font-size: 18px;
   background-color: #fffbad00;
-  cursor: pointer;    
+  cursor: pointer;  
+  margin-right: 10px;
 }
 
 .button-feed {
@@ -263,6 +273,7 @@ section {
   background-color: #fffbad00;  
   visibility: hidden;
   align-content: flex-end;
+  
 }
 
 .button-delcom {
@@ -285,14 +296,50 @@ section {
   display: none;
 }
 
+.radio{
+  width:100%; 
+  align-items: flex-start;
+  }
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+  margin-top: 10px;
+  width: 215px;
+}
+
+.public {
+  padding: 10px;
+  background-image: url(../img/open-padlock.svg);
+  background-size: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+}
+
+.private {
+  padding: 10px;
+  background-image: url(../img/padlock.svg);
+  background-size: 18px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .profile-area {
-  padding-top: 0px;  
+  padding-top: 10px;  
   text-align: center;
   font-family: 'Josefin Sans', sans-serif;
 }
 
+.post-area-profile {
+  display: flex;
+  justify-content: center;  
+ }
+
 
 @media screen and (min-width: 768px) {
+  
   .login {
     display: flex;
     margin: 0 auto;
@@ -327,25 +374,63 @@ section {
   .primary-button {  
     width: auto; 
   }
-  
+
   .phrase {
     font-size: 16px;
   }
 
-  .img-user {    
-    margin-left: 80px;    
+  .select { 
+    display: flex;
+    justify-content: flex-end;
   }
+  
+  .radio{
+    width:100%; 
+    align-items: flex-start;
+    }
+
+  .label {
+    display: flex;
+    justify-content: space-between;
+    justify-content: center;
+    margin-top: 10px;
+    width: 70%;
+  }
+
+  .public {
+    
+    padding: 10px;
+    background-image: url(../img/open-padlock.svg);
+    background-size: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+  }
+
+  .private {
+    padding: 10px;
+    background-image: url(../img/padlock.svg);
+    background-size: 18px;
+    background-position: center;
+    background-repeat: no-repeat;
+  } 
 
   .option { 
     margin-left: 160px;      
   }
 
   .post {    
-    width: 415px;
-    height: 50px;       
+    width: 70%;
+    height: 30%;       
   }
 
   .id-user {    
     font-size: 16px;       
+  }
+  .post-area-profile {
+    
+    display: flex;
+    justify-content: center;  
+    
   }
 }

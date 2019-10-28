@@ -1,5 +1,6 @@
 import Button from '..//components/button.js';
 
+
 window.app = {
   loadPost: loadPost,
   filterPost: filterPost
@@ -9,19 +10,12 @@ function savePost() {
   const post = document.querySelector('.post').value;
   const uid = firebase.auth().currentUser.uid;
   const privacyPost = document.getElementsByName('privacy');
-  let optionPost = '';
+  let optionPost = ''; 
+
+  post === ''? alert('Ops! Você não disse o que quer trocar.'):
+  privacyPost[0].checked ? optionPost = 'public': optionPost = 'privacy';
   
-  if (post === '') {    
-    alert('Ops! Você não disse o que quer trocar.')
-
-  } else {
-    if (privacyPost[0].checked) {
-      optionPost = 'public'
-    } else {
-      optionPost = 'privacy'
-    }
-
-    db.collection('post').add({
+     db.collection('post').add({
       post: post,
       likes: 0,    
       uid: uid,
@@ -34,9 +28,7 @@ function savePost() {
     })
     document.querySelector('.post').value = '';  
   }
-  
-};
-
+ 
 function addPost(post) {
   const feed = document.querySelector('.feed');   
   const privacy = post.data().privacy;  
@@ -120,9 +112,9 @@ function loadPost() {
     document.querySelector('.feed').innerHTML = '';
     snap.forEach(post => {
       addPost(post)
+      })
     })
-  })
-};
+  };
 
 function filterPost() {
   const user = firebase.auth().currentUser.uid;  
