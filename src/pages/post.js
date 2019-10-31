@@ -1,31 +1,31 @@
-import Button from '..//components/button.js';
+import Button from '../components/button.js';
 
 window.app = {
-  loadPost: loadPost,
-  filterPost: filterPost
+  loadPost,
+  filterPost
 };
 
 function savePost() {
   const post = document.querySelector('.post').value;
   const uid = firebase.auth().currentUser.uid;
-  const privacyPost = document.getElementsByName('privacy');
-  let optionPost = '';
+  const privacy = document.getElementsByName('privacy');
+  let optionPrivacy = '';
   
   if (post === '') {    
     alert('Ops! Você não disse o que quer trocar.')
 
   } else {
-    if (privacyPost[0].checked) {
-      optionPost = 'public'
+    if (privacy[0].checked) {
+      optionPrivacy = 'public'
     } else {
-      optionPost = 'privacy'
+      optionPrivacy = 'privacy'
     }
 
     db.collection('post').add({
-      post: post,
+      post,
       likes: 0,    
       uid: uid,
-      privacy: optionPost,
+      privacy: optionPrivacy,
       idname: firebase.auth().currentUser.displayName,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),    
     })
@@ -33,8 +33,7 @@ function savePost() {
       app.loadPost()
     })
     document.querySelector('.post').value = '';  
-  }
-  
+  }  
 };
 
 function addPost(post) {
@@ -44,53 +43,44 @@ function addPost(post) {
   if (privacy === 'public') {
   const feedPost = `  
   <li data-id= '${post.id}' class="post-list">
-  Publicado por<span class= "idname"> ${post.data().idname}</span>
-  <br>
+  Publicado por<span class= "idname"> ${post.data().idname}</span>  
   <span class="date-hour">${post.data().timestamp.toDate().toLocaleString('pt-BR')}</span>
   <p class="border"></p>
   <div class="text-post" data-id='${post.id}'>
     ${post.data().post}
-  </div>
-  <br>  
-  <br>
+  </div> 
   <p class="border"></p>
   ${Button({ dataId: post.id, class: "button-feed", onClick: countLikes, title:'💛' })} 
   ${post.data().likes}
   ${Button({ dataId: post.id, class: "button-feed", onClick: showComments, title:'💬' })} 
   <p class="border"></p>  
   <textarea name="txtcom" class="txtcom hideComments" data-id= '${post.id}' placeholder="Comenta aqui! :)"></textarea>
-  ${Button({ dataId: post.id, class: "button-save", onClick: saveComments, title:'✅' })}
-  <br>
-  <div class="feedcom" data-id='${post.id}'>
-  </div>  
+  ${Button({ dataId: post.id, class: "button-save", onClick: saveComments, title:'✅' })}  
+  <div class="comments" data-id='${post.id}'></div>  
   </li>  
-  <br>
   `
-
+  
   db.collection(`post/${post.id}/comments`).orderBy('timestamp', 'desc').get()
   .then((snapcomments) => {
     snapcomments.forEach((comment) => {
-      const feedcom = document.querySelector(`.feedcom[data-id='${post.id}']`);
+      const comments = document.querySelector(`.comments[data-id='${post.id}']`);
       
-      feedcom.innerHTML += `
-      <span>Comentado por <span class= "idname">${comment.data().idname}</span>
-      <br> 
+      comments.innerHTML += `
+      <span>Comentado por <span class= "idname">${comment.data().idname}</span>      
       ${comment.data().timestamp.toDate().toLocaleString('pt-BR')}
-      ${Button({ dataId: comment.id, dataId2: post.id, class: "button-delcom", onClick: deleteCom, title:'🗑' })}      
-      <br>
-      <br> 
-      ${comment.data().txtComment}
+      ${Button({ id: comment.id, dataId: post.id, uid: comment.data().uid, class: "button-delcom", onClick: deleteCom, title:'🗑' })}      
+      <p>${comment.data().txtComment}</p> 
       <p class="border"></p>      
-      <br>
       `          
-    })   
+    })
+    
   })
-  feed.innerHTML += feedPost;
-  }
+  feed.innerHTML += feedPost;  
+  } 
 };
 
 
-function addPostPro(post) {
+function addPostProfile(post) {
   const feed = document.querySelector('.feed');
   const feedPost = `  
   <li data-id= '${post.id}' class="post-list">
@@ -98,17 +88,14 @@ function addPostPro(post) {
   <p class="border"></p>
   <div class="text-post" data-id='${post.id}'>
   ${post.data().post}
-  </div>
-  <br>  
-  <br>
+  </div>  
   <p class="border"></p>
   ${Button({ dataId: post.id, class: "button-feed", onClick: editPost, title:'🖍' })}    
   ${Button({ dataId: post.id, class: "button-feed", onClick: deletePost, title:'🗑' })}
   ${Button({ dataId: post.id, class: "button-feed", onClick: changePrivacy, title:'🔓' })}
   ${Button({ dataId: post.id, class: "button-save", onClick: saveEdit, title:'✅' })}   
   <span class="date-hour">${post.data().timestamp.toDate().toLocaleString('pt-BR')}</span>    
-  </li>
-  <br>
+  </li>  
   `
   feed.innerHTML += feedPost;
 };
@@ -132,7 +119,7 @@ function filterPost() {
   .then((snap) => {
     document.querySelector('.feed').innerHTML = '';
     snap.forEach(post => {
-      addPostPro(post)
+      addPostProfile(post)
     })
   })
 };
@@ -210,14 +197,17 @@ function deletePost(event) {
   event.target.parentElement.remove();
 };
 
-function deleteCom(event) {
-  const id = event.target.parentElement.parentElement.getAttribute('data-id');  
-  const id2 = event.target.dataset.id;    
-  db.collection(`post/${id}/comments`).doc(id2).delete();
-  event.target.parentElement.remove();
-  
-  app.loadPost();
+function deleteCom(event) {  
+  const id = event.target.dataset.id;  
+  const id2 = event.target.id;
+  const user = firebase.auth().currentUser.uid;
+  const userCom = event.target.dataset.uid;
 
+  if (userCom === user) {   
+    db.collection(`post/${id}/comments`).doc(id2).delete();
+    event.target.parentElement.remove();            
+    app.loadPost();
+  }
 };
 
 

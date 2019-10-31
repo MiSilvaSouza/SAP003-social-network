@@ -90,7 +90,6 @@ nav ul li:last-child {
   border-top-style: inset;
 }
 
-
 .primary-button {
   margin-top: 10px;
   margin-left: auto;
@@ -144,19 +143,20 @@ section {
   text-align: center;   
 }
 
+.img {
+  text-align: center;
+}
+
 .img-user {  
   width: 60px;
   height: 60px;
-  background: url(./img/profile_girl.png) center center/60px no-repeat;
-  margin-left: 40px;
-  margin-right: 10px;
+  background: url(./img/profile_girl.png) center center/60px no-repeat;  
   border: none;  
 }
 
-.option { 
-  margin-left: 120px;    
+.option {  
+  text-align: center;    
 }
-
 
 .id-user {
   text-align: right;
@@ -174,8 +174,10 @@ section {
 
 .post {
   font-size: 12px;
-  width: 215px;
+  margin:0 auto 20px auto;
+  width: 80%;
   height: 50px;
+  display: flex;
   resize: none;
   border-radius: 3px;     
 }
@@ -295,7 +297,7 @@ section {
 @media screen and (min-width: 768px) {
   .login {
     display: flex;
-    margin: 0 auto;
+    
   }
 
   .login-form {
@@ -330,19 +332,6 @@ section {
   
   .phrase {
     font-size: 16px;
-  }
-
-  .img-user {    
-    margin-left: 80px;    
-  }
-
-  .option { 
-    margin-left: 160px;      
-  }
-
-  .post {    
-    width: 415px;
-    height: 50px;       
   }
 
   .id-user {    

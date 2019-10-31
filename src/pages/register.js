@@ -48,17 +48,13 @@ function register() {
   const template = `
     <div class="login">   
       ${Logo({ class: "logo"})}
-    <div class="login-form">
-    <br>
-    <form>    
-    ${Input({ class: 'js-namefull-input', type: 'text', placeholder: 'Nome Completo' })}
-    <br>  
-    ${Input({ class: 'js-email-input', type: 'email', placeholder: 'Email' })}
-    <br>
-    ${Input({ class: 'js-password-input', type: 'password', placeholder: 'Senha' })}       
-    <br>
-    ${Button({ class: "primary-button", onClick: criarLogin, title: 'CADASTRAR' })}
-    </form>
+    <div class="login-form">   
+      <form>    
+        ${Input({ class: 'js-namefull-input', type: 'text', placeholder: 'Nome Completo' })}    
+        ${Input({ class: 'js-email-input', type: 'email', placeholder: 'Email' })}    
+        ${Input({ class: 'js-password-input', type: 'password', placeholder: 'Senha' })}    
+        ${Button({ class: "primary-button", onClick: criarLogin, title: 'CADASTRAR' })}
+      </form>
     </div>
     </div>
     `;
