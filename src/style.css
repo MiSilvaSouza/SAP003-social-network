@@ -143,19 +143,19 @@ section {
   text-align: center;   
 }
 
+.img {
+  text-align: center;
+}
+
 .img-user {  
   width: 60px;
   height: 60px;
-  display:flex;
-  align-items: center;
-  background: url(./img/profile_girl.png) center center/60px no-repeat;
-  /* margin-left: 40px;
-  margin-right: 10px; */
+  background: url(./img/profile_girl.png) center center/60px no-repeat;  
   border: none;  
 }
 
-.option { 
-  margin-left: 120px;    
+.option {  
+  text-align: center;    
 }
 
 .id-user {
@@ -168,30 +168,21 @@ section {
 }
 
 .post-area {
-  margin:0 auto 20px auto; 
-  width: 80%; 
-  padding-top: 20px; 
-  font-family: 'Josefin Sans', sans-serif;
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  border-radius: 3px; 
-  text-align: left;  
-  background-color: #fff;
-  font-family: 'Josefin Sans', sans-serif;
+  padding-top: 20px;
+  font-family: 'Josefin Sans', sans-serif;  
 }
 
 .post {
-  margin-top: 20px;
-  font-size: auto;
-  width: 70%;
-  height: auto;
-  resize: none; 
-  border-radius: 3px; 
-  background-color: whitesmoke;
+  font-size: 12px;
+  margin:0 auto 20px auto;
+  width: 80%;
+  height: 50px;
+  display: flex;
+  resize: none;
+  border-radius: 3px;     
 }
 
-.txtcom {
+.text-comment {
   margin-left: auto;
   margin-right: auto;   
   margin-top: 10px;
@@ -213,7 +204,7 @@ section {
   align-items: center;
   text-align: left;  
   background-color: #fff;
-  border-style: outset;
+  border-style: outset;;
 }
 
 .idname {
@@ -252,11 +243,12 @@ section {
 }
 
 .button-send {
-  display: flex;
+  display: inline;
+  margin-left: 5px;
+  margin-right: 5px;
   font-size: 18px;
   background-color: #fffbad00;
-  cursor: pointer;  
-  margin-right: 10px;
+  cursor: pointer;    
 }
 
 .button-feed {
@@ -273,7 +265,6 @@ section {
   background-color: #fffbad00;  
   visibility: hidden;
   align-content: flex-end;
-  
 }
 
 .button-delcom {
@@ -296,53 +287,17 @@ section {
   display: none;
 }
 
-.radio{
-  width:100%; 
-  align-items: flex-start;
-  }
-
-.label {
-  display: flex;
-  justify-content: space-between;
-  justify-content: center;
-  margin-top: 10px;
-  width: 215px;
-}
-
-.public {
-  padding: 10px;
-  background-image: url(../img/open-padlock.svg);
-  background-size: 20px;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin-right: 10px;
-}
-
-.private {
-  padding: 10px;
-  background-image: url(../img/padlock.svg);
-  background-size: 18px;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
 .profile-area {
-  padding-top: 10px;  
+  padding-top: 0px;  
   text-align: center;
   font-family: 'Josefin Sans', sans-serif;
 }
 
-.post-area-profile {
-  display: flex;
-  justify-content: center;  
- }
-
 
 @media screen and (min-width: 768px) {
-  
   .login {
     display: flex;
-    margin: 0 auto;
+    
   }
 
   .login-form {
@@ -374,63 +329,12 @@ section {
   .primary-button {  
     width: auto; 
   }
-
+  
   .phrase {
     font-size: 16px;
   }
 
-  .select { 
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .radio{
-    width:100%; 
-    align-items: flex-start;
-    }
-
-  .label {
-    display: flex;
-    justify-content: space-between;
-    justify-content: center;
-    margin-top: 10px;
-    width: 70%;
-  }
-
-  .public {
-    
-    padding: 10px;
-    background-image: url(../img/open-padlock.svg);
-    background-size: 20px;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin-right: 10px;
-  }
-
-  .private {
-    padding: 10px;
-    background-image: url(../img/padlock.svg);
-    background-size: 18px;
-    background-position: center;
-    background-repeat: no-repeat;
-  } 
-
-  .option { 
-    margin-left: 160px;      
-  }
-
-  .post {    
-    width: 70%;
-    height: 30%;       
-  }
-
   .id-user {    
     font-size: 16px;       
-  }
-  .post-area-profile {
-    
-    display: flex;
-    justify-content: center;  
-    
   }
 }

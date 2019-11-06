@@ -8,28 +8,28 @@ function locationHashChanged() {
   firebase.auth().onAuthStateChanged(function(user) {
     switch (location.hash) {
 
-      case '#register.js': 
-        user ? window.location = '#home.js' : 
+      case '#register': 
+        user ? window.location = '#home' : 
         document.querySelector('main').innerHTML = register();
         break;
 
-      case '#home.js': 
+      case '#home': 
         user ? document.querySelector('main').innerHTML = home() :
-        window.location = '#login.js';        
+        window.location = '#login';        
         break;       
       
-      case '#login.js': 
-        user ? window.location = '#home.js' : 
+      case '#login': 
+        user ? window.location = '#home' : 
         document.querySelector('main').innerHTML = login();
         break;
 
-      case '#profile.js': 
+      case '#profile': 
         user ? document.querySelector('main').innerHTML = profile() :
-        window.location = '#login.js';        
+        window.location = '#login';        
         break;
 
       default:
-        window.location = '#login.js'
+        window.location = '#login'
 
     }
   })        
