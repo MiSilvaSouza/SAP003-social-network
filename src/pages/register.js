@@ -17,7 +17,7 @@ function criarLogin() {
     uid = firebase.auth().currentUser.uid
 
     if (uid != null) {      
-      window.location = '#home.js';      
+      window.location = '#home';      
       db.collection('users').add({
         name: name,
         email: email,
@@ -30,16 +30,16 @@ function criarLogin() {
 
     if (errorCode === 'auth/weak-password') {
       alert('A senha precisa ter no mínimo 6 dígitos!')      
-      window.location = '#login.js';
-      window.location = '#register.js';     
+      window.location = '#login';
+      window.location = '#register';     
     } else if (errorCode === 'auth/invalid-email') {
       alert('Digite um e-mail válido!')
-      window.location = '#login.js';
-      window.location = '#register.js';      
+      window.location = '#login';
+      window.location = '#register';      
     } else if (errorCode === 'auth/email-already-in-use') {
       alert('Este e-mail já foi utilizado!')
-      window.location = '#login.js';
-      window.location = '#register.js';      
+      window.location = '#login';
+      window.location = '#register';      
     }      
   });
 }

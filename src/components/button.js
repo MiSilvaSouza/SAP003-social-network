@@ -5,7 +5,7 @@ function Button(props) {
     data-id="${props.dataId}" 
     data-uid="${props.uid}" 
     class="${props.class}" 
-    onclick="button.handleClick(event, ${props.onClick})" >${props.title}
+    onclick="button.handleClick(event, ${props.onClick})">${props.title}
     </button>
   `;
 

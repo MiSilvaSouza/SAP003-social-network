@@ -24,12 +24,12 @@ function savePost() {
     db.collection('post').add({
       post,
       likes: 0,    
-      uid: uid,
+      uid,
       privacy: optionPrivacy,
       idname: firebase.auth().currentUser.displayName,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),    
     })
-    .then(function () {    
+    .then(() => {    
       app.loadPost()
     })
     document.querySelector('.post').value = '';  
@@ -54,8 +54,8 @@ function addPost(post) {
   ${post.data().likes}
   ${Button({ dataId: post.id, class: "button-feed", onClick: showComments, title:'💬' })} 
   <p class="border"></p>  
-  <textarea name="txtcom" class="txtcom hideComments" data-id= '${post.id}' placeholder="Comenta aqui! :)"></textarea>
-  ${Button({ dataId: post.id, class: "button-save", onClick: saveComments, title:'✅' })}  
+  <textarea name="text-comment" class="text-comment hideComments" data-id= '${post.id}' placeholder="Comenta aqui! :)"></textarea>
+  ${Button({ dataId:post.id, class: "button-save", onClick: saveComments, title:'✅' })}  
   <div class="comments" data-id='${post.id}'></div>  
   </li>  
   `
@@ -69,7 +69,7 @@ function addPost(post) {
       <span>Comentado por <span class= "idname">${comment.data().idname}</span>      
       ${comment.data().timestamp.toDate().toLocaleString('pt-BR')}
       ${Button({ id: comment.id, dataId: post.id, uid: comment.data().uid, class: "button-delcom", onClick: deleteCom, title:'🗑' })}      
-      <p>${comment.data().txtComment}</p> 
+      <p>${comment.data().textComment}</p> 
       <p class="border"></p>      
       `          
     })
@@ -139,18 +139,18 @@ function countLikes(event) {
 function changePrivacy(event) {
   const id = event.target.dataset.id;  
   db.collection('post').doc(id).get()
-  .then((post => {
+  .then(() => {
     const upPrivacy = 'public';
     db.collection('post').doc(id).update({
       privacy: upPrivacy
     });
     app.loadPost();
-  }))  
+  })  
 };
 
 function showComments(event){
   const id = event.target.dataset.id;  
-  const comments = document.querySelector(`.txtcom[data-id='${id}']`);
+  const comments = document.querySelector(`.text-comment[data-id='${id}']`);
   comments.classList.remove('hideComments');
   const saveButton = document.querySelector(`.button-save[data-id='${id}']`);
   saveButton.classList.add('show');  
@@ -158,12 +158,12 @@ function showComments(event){
 
 function saveComments(event) {    
   const id = event.target.dataset.id;  
-  const txtComment = document.querySelector(`.txtcom[data-id='${id}']`).value;
+  const textComment = document.querySelector(`.text-comment[data-id='${id}']`).value;
   const uid = firebase.auth().currentUser.uid;  
   
   db.collection(`post/${id}/comments`).add({
-    txtComment: txtComment,    
-    uid: uid,
+    textComment,    
+    uid,
     postId: id,
     idname: firebase.auth().currentUser.displayName,    
     timestamp: firebase.firestore.FieldValue.serverTimestamp(),    
@@ -198,13 +198,13 @@ function deletePost(event) {
 };
 
 function deleteCom(event) {  
-  const id = event.target.dataset.id;  
-  const id2 = event.target.id;
-  const user = firebase.auth().currentUser.uid;
-  const userCom = event.target.dataset.uid;
+  const idPost = event.target.dataset.id;  
+  const idComment = event.target.id;
+  const currentUser = firebase.auth().currentUser.uid;
+  const userComment = event.target.dataset.uid;
 
-  if (userCom === user) {   
-    db.collection(`post/${id}/comments`).doc(id2).delete();
+  if (userComment === currentUser) {   
+    db.collection(`post/${idPost}/comments`).doc(idComment).delete();
     event.target.parentElement.remove();            
     app.loadPost();
   }

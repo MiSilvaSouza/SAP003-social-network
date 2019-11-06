@@ -22,15 +22,15 @@ function home() {
     </nav>         
     </header>     
     <div class= "img">
-      <a href ='#profile.js'><img class="img-user" src="./img/profile_girl.png"/></a>
+      <a href ='#profile'><img class="img-user" src="./img/profile_girl.png"/></a>
     </div>
     <div class ="post-area">            
       <textarea name="post" class="post" placeholder="O que você quer trocar?"></textarea>    
     <form class="option">
       <input type="radio" name="privacy" class="privacy" checked>      
-      <label for="public">🔓</label>
+      <label for="public"><i class="fas fa-lock-open"></i></label>
       <input type="radio" name="privacy" class="privacy">
-      <label for="privacy">🔒</label>
+      <label for="privacy"><i class="fas fa-lock"></i></label>
       ${Button({ class: "button-send", onClick: savePost, title:'<i class="fas fa-paper-plane"></i>' })}
     </form>  
     </div>    

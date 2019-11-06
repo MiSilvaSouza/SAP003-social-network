@@ -13,25 +13,25 @@ function enviarLogin() {
   .then(function () {
     uid = firebase.auth().currentUser.uid;
     if (uid != null) {      
-      window.location = '#home.js';     
+      window.location = '#home';     
     }   
   }).catch(function(error) {     
     let errorCode = error.code;
     if (errorCode === 'auth/user-not-found') {
       alert('Usuário não encontrado!')
-      window.location = '#home.js';     
+      window.location = '#home';     
     } else if (errorCode === 'auth/invalid-email') {
       alert('Digite um e-mail válido!')
-      window.location = '#home.js';      
+      window.location = '#home';      
     } else if (errorCode === 'auth/wrong-password') {
       alert('Email ou senha inválido!')
-      window.location = '#home.js';     
+      window.location = '#home';     
     }
   });
   
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {      
-      window.location = '#home.js';
+      window.location = '#home';
     }
   });    
 };

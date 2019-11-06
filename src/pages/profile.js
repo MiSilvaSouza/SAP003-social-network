@@ -1,10 +1,10 @@
-import Button from '..//components/button.js';
+import Button from '../components/button.js';
 import Logo from '../components/logo.js';
 
 function signOut() {  
   firebase.auth().signOut()
   .then(function () {
-    window.location = '#login.js';
+    window.location = '#login';
     
   }).catch(function (error) {
     
@@ -18,7 +18,7 @@ function profile() {
       ${Logo({ class: "logonav" })}
       <nav>
         <ul>
-          <li><a href="#home.js" class ="button-home"><i class="fas fa-home"></i></a></li>
+          <li><a href="#home" class ="button-home"><i class="fas fa-home"></i></a></li>
           <li>${Button({ class: "button-out", onClick: signOut, title:'Log Out <i class="fas fa-sign-out-alt"></i>' })}</li>
         </ul>
       </nav>         
